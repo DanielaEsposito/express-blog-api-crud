@@ -1,32 +1,40 @@
 
 const postsData = require("../data/posts")
 
+
+
 //index
 function index(req, res) {
     const {tags, title} = req.query
     let filteredPosts = [...postsData];
     if(title){
-        filteredPosts = postsData.filter ((post)=> post.title.toLowerCase()=== title.toLowerCase());
+        filteredPosts = postsData.filter ((post)=> post.title.toLowerCase() === title.toLowerCase());
 
     }
     if(tags){
         filteredPosts= postsData.filter((post)=> post.tags.includes(tags));
     }
+ 
+    
 
-    res.json(postsData);
+
+    res.json(filteredPosts);
     }
-
 //show
 function show (req,res){
-   const id = parseInt(req.params.id);
-   const post = postsData.find(post=> post.id === id);
+   const {title} = req.query;
+   const post = postsData.find(post=> post.title === title);
    if(!post){
     return res.status(404).json({
         error: "not found"
     })
    }
+console.log(post);
+;
 
 res.json(post);
+
+
 
 }
 // create

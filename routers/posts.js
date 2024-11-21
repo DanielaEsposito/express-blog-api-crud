@@ -4,7 +4,7 @@ const postsController = require("../controllers/postsController")
 //! ROTTE
 
 // index
-router.get('/',postsController.index)
+router.get('/',postsController.index);
 // Show
 router.get ("/:id", postsController.show);
 //Create
