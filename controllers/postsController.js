@@ -43,4 +43,4 @@ function destroy(req,res){
     res.json(`eliminazione del post con id: ${id}`);
 
 }
-module.exports ={index, show, create, modify, update,destroy};
+module.exports ={index, show, create, modify, update, destroy};
