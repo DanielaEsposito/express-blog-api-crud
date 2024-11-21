@@ -3,11 +3,18 @@ const posts = require("../data/posts")
 
 //index
 function index(req, res) {
+    const {tags, title} = req.query
+    let filteredPosts = [...posts]
+    if(title){
+        filteredPosts = posts.filter ((post)=> post.name.toLowerCase()=== title.toLowerCase)
 
-    res.json({
-        number : posts.length,
-        posts :posts
-    })}
+    }
+    if(tags){
+        filteredPosts= posts.filter((post)=> post.tags.includes(tags));
+    }
+
+    res.json(posts);
+    }
 
 //show
 function show (req,res){

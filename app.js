@@ -18,6 +18,6 @@ app.use("/posts", postsRouter);
 // ;
 
 app.listen(port ,()=>{
-    console.log("il server è online");
+    console.log(`App listening at ${domain}${port}`);
     
 })
