@@ -20,6 +20,11 @@ function index(req, res) {
 function show (req,res){
    const id = parseInt(req.params.id);
    const post = postsData.find(post=> post.id === id);
+   if(!post){
+    return res.status(404).json({
+        error: "not found"
+    })
+   }
 
 res.json(post);
 
@@ -47,8 +52,16 @@ function modify (req,res){
 // destroy
 
 function destroy(req,res){
-    const {id} = req.params;
-    res.json(`eliminazione del post con id: ${id}`);
+   const id = parseInt(req.params.id);
+   const post = postsData.find(post=> post.id === id);
+   if(!post){
+    return res.status(404).json({
+        error: "not found...you can't delete"
+    });
+   } 
+   const postIndex= postsData.indexOf(post);;
+   postsData.splice(postIndex, 1);
+   res.json(postsData);
 
 }
 module.exports ={index, show, create, modify, update, destroy};
