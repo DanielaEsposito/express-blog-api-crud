@@ -6,7 +6,7 @@ function index(req, res) {
     const {tags, title} = req.query
     let filteredPosts = [...postsData];
     if(title){
-        filteredPosts = postsData.filter ((post)=> post.title.toLowerCase()=== title.toLowerCase);
+        filteredPosts = postsData.filter ((post)=> post.title.toLowerCase()=== title.toLowerCase());
 
     }
     if(tags){
