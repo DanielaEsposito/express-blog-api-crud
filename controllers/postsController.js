@@ -6,7 +6,7 @@ function index(req, res) {
     const {tags, title} = req.query
     let filteredPosts = [...posts]
     if(title){
-        filteredPosts = posts.filter ((post)=> post.name.toLowerCase()=== title.toLowerCase)
+        filteredPosts = posts.filter ((post)=> post.title.toLowerCase()=== title.toLowerCase)
 
     }
     if(tags){
@@ -19,8 +19,7 @@ function index(req, res) {
 //show
 function show (req,res){
    
-    const {id} = req.params;
-    res.json(posts[id]);
+    res.json(post);
 
 }
 // create
