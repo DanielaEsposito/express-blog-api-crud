@@ -29,4 +29,5 @@ const posts =[
         img:"./public/img/torta_paesana.jpeg",
         tags : ["tradizione", "torta", "dolce"]
     }]
+    module.exports = posts;
     

@@ -8,7 +8,7 @@ const domain =process.env.HOST_DOMAIN;
 
 app.use(express.static('public'));
 
-const postsRouter = require("./routers/posts");
+const postsRouter = require("./routers/posts.js");
 
 app.use("/posts", postsRouter);
 
