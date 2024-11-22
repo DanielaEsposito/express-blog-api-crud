@@ -65,12 +65,30 @@ function create (req,res){
 // update
 
 function update(req,res){
-   
+   //cerco la pizza da modificare
+
+//controllo errore
+if (!post){
+    return res.status(404).json({error: "not found"});
+}
+//recupero i nuovi parametri
+const {title, img, tags, contenuto} =req.body;
+// if(!title || !img || !contenuto || !tags?.length ){
+//     return res.status(400).json({error: "not valid"});
+// }
+//aggiorno il post
+post.title = title,
+post.img = img,
+post.contenuto = contenuto,
+post.tags =tags
+
+res.json(post)
 
 }
 //modify
 function modify (req,res){
-    const {id} = req.params;
+    
+
     res.json(`modifica parziale il post con id: ${id}`);
 
 }
