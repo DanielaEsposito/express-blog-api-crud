@@ -85,13 +85,29 @@ post.tags =tags
 res.json(post)
 
 }
+
 //modify
 function modify (req,res){
     
-
-    res.json(`modifica parziale il post con id: ${id}`);
+    const id = parseInt(req.params.id);
+    const post = postsData.find((post)=> post.id === id);
+    const {title, contenuto, img, tags}= req.body;
+    if(title){
+        post.title=title
+    }
+    if(contenuto){
+        post.contenuto=contenuto
+    }
+    if(img){
+        post.img=img
+    }
+    if(tags?.lenght){
+        post.tags=tags
+    }
+    res.json(post);
 
 }
+
 // destroy
 
 function destroy(req,res){
