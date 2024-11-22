@@ -1,4 +1,5 @@
 
+// importo file Array posts
 const postsData = require("../data/posts")
 
 
@@ -40,15 +41,31 @@ res.json(post);
 // create
 
 function create (req,res){
-    const {id} = req.params;
-    res.json(`crea un nuovo post`);
+    const {title, img , contenuto, tags} = req.body;
+    const id = postsData.at(-1).id + 1;
+    // if(
+    //     !title || 
+    //     !img  || 
+    //     !contenuto ||
+    //     // controllo prima se il dato che arriva è un array 
+    //     !tags?.lenght ){
+    
+    //     return res.status(400).json({error: "not valid"});
+    //     }
+
+    const newPost={ id, title, contenuto , img , tags }
+
+    postsData.push(newPost);
+    res.json(newPost);
+    console.log(newPost);
+    
+    
 
 }
 // update
 
 function update(req,res){
-    const {id} = req.params;
-    res.json(`modifica il post con id: ${id}`);
+   
 
 }
 //modify
