@@ -23,14 +23,18 @@ function index(req, res) {
     }
 //show
 function show (req,res){
+    
+ pippo.get();
+ 
+
    const {title} = req.query;
    const post = postsData.find(post=> post.title === title);
    if(!post){
-    return res.status(404).json({
-        error: "not found"
-    })
-   }
-console.log(post);
+    const err = new Error("id post not found");
+    err.code = 404;
+    throw err;
+    }
+//console.log(post);
 ;
 
 res.json(post);
@@ -41,17 +45,19 @@ res.json(post);
 // create
 
 function create (req,res){
+    
     const {title, img , contenuto, tags} = req.body;
     const id = postsData.at(-1).id + 1;
-    // if(
-    //     !title || 
-    //     !img  || 
-    //     !contenuto ||
-    //     // controllo prima se il dato che arriva è un array 
-    //     !tags?.lenght ){
+    if(
+        !title || 
+        !img  || 
+        !contenuto ||
+        // controllo prima se il dato che arriva è un array 
+        !tags?.length
+     ){
     
-    //     return res.status(400).json({error: "not valid"});
-    //     }
+        return res.status(400).json({error: "not valid"});
+        }
 
     const newPost={ id, title, contenuto , img , tags }
 

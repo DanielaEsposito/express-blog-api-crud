@@ -7,10 +7,16 @@ const express = require('express');
 const app = express();
 const port = process.env.HOST_PORT;
 const domain =process.env.HOST_DOMAIN;
+
+//! MIDDLEWERES
+const errorHandler = require("./middleware/errorHandler.js");
 //jason parser for body request
 app.use (express.json());
 // serving public folder
 app.use(express.static('public'));
+
+
+//!ROUTERS
 
 // importo file rotte nella cartella routers
 const postsRouter = require("./routers/posts.js");
@@ -22,6 +28,8 @@ app.use("/posts", postsRouter);
 // })
 // ;
 
+//! ERROR HENDLER
+app.use(errorHandler);
 // start listening
 app.listen(port ,()=>{
     console.log(`App listening at ${domain}${port}`);
