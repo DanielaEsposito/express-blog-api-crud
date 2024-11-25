@@ -10,6 +10,7 @@ const domain =process.env.HOST_DOMAIN;
 
 //! MIDDLEWERES
 const errorHandler = require("./middleware/errorHandler.js");
+const notFound = require("./middleware/notFound.js");
 //jason parser for body request
 app.use (express.json());
 // serving public folder
@@ -30,6 +31,7 @@ app.use("/posts", postsRouter);
 
 //! ERROR HENDLER
 app.use(errorHandler);
+app.use(notFound);
 // start listening
 app.listen(port ,()=>{
     console.log(`App listening at ${domain}${port}`);

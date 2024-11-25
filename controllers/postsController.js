@@ -29,6 +29,8 @@ function show (req,res){
 
    const {title} = req.query;
    const post = postsData.find(post=> post.title === title);
+   // errore di prova
+   //const post = Data.find(post=> post.title === title);
    if(!post){
     const err = new Error("id post not found");
     err.code = 404;
