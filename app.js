@@ -4,6 +4,7 @@ require ("dotenv").config();
 //! configurazione express
 // init express
 const express = require('express');
+const cors = require('cors')
 const app = express();
 const port = process.env.HOST_PORT;
 const domain =process.env.HOST_DOMAIN;
@@ -15,6 +16,10 @@ const notFound = require("./middleware/notFound.js");
 app.use (express.json());
 // serving public folder
 app.use(express.static('public'));
+//va messo sopra le rotte 
+app.use(cors({
+    origin: 'http://localhost:5173' 
+}))
 
 
 //!ROUTERS

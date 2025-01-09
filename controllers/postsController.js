@@ -24,11 +24,10 @@ function index(req, res) {
 //show
 function show (req,res){
     
- pippo.get();
+ //pippo.get();
  
-
-   const {title} = req.query;
-   const post = postsData.find(post=> post.title === title);
+  const id = parseInt(req.params.id);
+  const post= postsData.find((post)=> post.id === id);
    // errore di prova
    //const post = Data.find(post=> post.title === title);
    if(!post){
@@ -48,12 +47,14 @@ res.json(post);
 
 function create (req,res){
     
-    const {title, img , contenuto, tags} = req.body;
+    const {title, img , content, tags,category,published} = req.body;
     const id = postsData.at(-1).id + 1;
+    console.log(req.body);
+    
     if(
         !title || 
         !img  || 
-        !contenuto ||
+        !content ||
         // controllo prima se il dato che arriva è un array 
         !tags?.length
      ){
@@ -61,7 +62,7 @@ function create (req,res){
         return res.status(400).json({error: "not valid"});
         }
 
-    const newPost={ id, title, contenuto , img , tags }
+    const newPost={ id, title, content , img , tags, category, published }
 
     postsData.push(newPost);
     res.json(newPost);
@@ -74,20 +75,21 @@ function create (req,res){
 
 function update(req,res){
    //cerco la pizza da modificare
-
+const id = parseInt(req.params.id);
+let post =postsData.find((post)=> post.id === id);
 //controllo errore
 if (!post){
     return res.status(404).json({error: "not found"});
 }
 //recupero i nuovi parametri
-const {title, img, tags, contenuto} =req.body;
+const {title, img, tags, content} =req.body;
 // if(!title || !img || !contenuto || !tags?.length ){
 //     return res.status(400).json({error: "not valid"});
 // }
 //aggiorno il post
 post.title = title,
 post.img = img,
-post.contenuto = contenuto,
+post.contenuto = content,
 post.tags =tags
 
 res.json(post)
@@ -123,12 +125,14 @@ function destroy(req,res){
    const post = postsData.find(post=> post.id === id);
    if(!post){
     return res.status(404).json({
-        error: "not found...you can't delete"
+        error: "not found...you can't delete!!"
     });
    } 
    const postIndex= postsData.indexOf(post);;
    postsData.splice(postIndex, 1);
-   res.json(postsData);
+   res.send(postsData);
+   console.log(postsData);
+   
 
 }
 module.exports ={index, show, create, modify, update, destroy};
